@@ -1,0 +1,20 @@
+.botones-anfitrion {
+  margin-top: 24px;
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.boton-anfitrion-principal {
+  background-color: #4a90e2;
+  color: white;
+  border: 1px solid #4a90e2;
+}
+
+.boton-anfitrion-principal:hover {
+  background-color: #176fc7;
+  box-shadow: 0 4px 12px rgba(23, 111, 199, 0.28);
+}

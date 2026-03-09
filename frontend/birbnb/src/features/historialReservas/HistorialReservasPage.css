@@ -1,0 +1,62 @@
+
+.conteiner {
+  margin: auto;
+}
+
+/* Título reserva */
+.titulo-reserva {
+  margin-top: 120px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ccc;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin-bottom: 30px;
+}
+
+/* Media queries para pantallas pequeñas y medianas */
+@media (max-width: 1024px) {
+  .conteiner {
+    width: 90%; /* que ocupe casi toda la pantalla pero con margen */
+    height: auto; /* que el alto se adapte al contenido */
+  }
+  .titulo-reserva {
+    font-size: 1.3rem; /* un poco más chico */
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 512px) {
+  .conteiner {
+    width: 95%; /* casi todo el ancho en móviles */
+    height: auto;
+  }
+  .titulo-reserva {
+    font-size: 1.1rem; /* más pequeño para móviles */
+    margin-top: 50px;
+    padding-bottom: 0.3rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

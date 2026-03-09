@@ -1,0 +1,112 @@
+@startuml
+
+class Alojamiento {
+  - anfitrion: Usuario
+  - nombre: String
+  - descripcion: String
+  - precioPorNoche: Double
+  - moneda: Moneda
+  - horarioCheckin: String
+  - horarioCheckout: String
+  - direccion: Direccion
+  - cantHuespedesMax: number
+  - caracteristicas: Caracteristica[]
+  - reservas: Reserva[]
+  - fotos: Foto[]
+  + estasDisponibleEn(rangoDeFechas): boolean
+  + tuPrecioEstaDentroDe(valorMinimo, valorMaximo): boolean
+  + tenesCaracteristica(caracteristica): boolean
+  + puedenAlojarse(cantHuespedes): boolean
+}
+
+class Direccion {
+  - calle: String
+  - altura: String
+  - ciudad: Ciudad
+  - lat: String
+  - long: String
+}
+
+class Ciudad {
+  - nombre: String
+  - pais: Pais
+}
+
+class Pais {
+  - nombre: String
+}
+
+class Foto {
+  - descripcion: String
+  - path: String
+}
+
+class Reserva {
+  - fechaAlta: Date
+  - huespedReservador: Usuario
+  - cantHuespedes: number
+  - alojamiento: Alojamiento
+  - rangoFechas: RangoFechas
+  - estado: EstadoReserva
+  - precioPorNoche: Double
+  + actualizarEstado(EstadoReserva): void
+  + ocupaElRango(rangoFechas: RangoFechas)
+}
+
+class RangoFechas {
+  - fechaInicio: Date
+  - fechaFin: Date
+
+  +seSolapaCon(rangoFechas: RangoFechas): RangoFechas
+}
+
+class CambioEstadoReserva {
+  - fecha: Date
+  - estado: EstadoReserva
+  - reserva: Reserva
+  - motivo: String
+  - usuario: Usuario
+}
+
+object FactoryNotificacion {
+  + seCreoReserva(reserva: Reserva): Notificacion
+  + seConfirmoReserva(reserva: Reserva): Notificacion
+  + seCanceloReserva((reserva: Reserva): Notificacion
+}
+
+class Notificacion {
+  - mensaje: String
+  - usuario: Usuario
+  - fechaAlta: Date
+  - leida: boolean
+  - fechaLeida: Date
+  + marcarComoLeida(): void
+}
+
+class Usuario {
+  - nombre: String
+  - email: String
+  - tipo: TipoUsuario
+}
+
+Alojamiento --> Reserva
+Alojamiento .. RangoFechas
+Alojamiento --> Direccion
+Alojamiento --> Foto
+Alojamiento --> Usuario
+
+Reserva --> RangoFechas
+Reserva --> Usuario
+Reserva .. FactoryNotificacion
+
+FactoryNotificacion ..> Notificacion
+
+Notificacion --> Usuario
+
+CambioEstadoReserva --> Reserva
+CambioEstadoReserva --> Usuario
+
+Direccion --> Ciudad
+Ciudad --> Pais
+
+@enduml

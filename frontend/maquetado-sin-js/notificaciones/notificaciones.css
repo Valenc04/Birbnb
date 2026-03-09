@@ -1,0 +1,380 @@
+:root {
+  --azul: #3182ce;
+  --blanco: #f4f4f4;
+  --gris: #ffffff5b;
+  --gris-oscuro: #333;
+  --bordes: 1px solid #e2e8f0;
+  --border-color: 3px solid #EBEBEB;
+  --primary-background-color: #FFFFFF;
+  --secondary-background-color: #F7F7F7;
+  --background-boton: #ebebeb;
+
+  --gradiente: linear-gradient(90deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+  --gradienteBanner: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+
+  --sombra: 0 1px 2px 0 #0000001a;
+  --fuente-principal: 'Circular', 'Helvetica Neue', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fuente-principal);
+  margin-top: 0;
+  background-color: var(--primary-background-color);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  padding: 0 50px;
+}
+
+header {
+  padding: 0;
+  background-color: #f1f1f1;
+  border-bottom: var(--border-color);
+  border-bottom: 3px;
+  position: sticky;
+  top: 0;
+  z-index: 10; 
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  background-color: #f1f1f1;
+  border-bottom: var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10; 
+}
+
+.nav_logo {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none; 
+  color: var(--gradienteBanner);
+  background: linear-gradient(90deg, #003973 0%, #005f99 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0;
+}
+
+.nav_logo img {
+  height: 55px;
+  width: 55px;
+}
+
+.user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 60px;
+  margin-left: auto;
+}
+
+#toggle-menu {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.user-icon {
+  background: var(--azul);
+  color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.dropdown {
+  position: absolute;
+  right: 40px;
+  top: 60px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  z-index: 100;
+  padding: 12px 0;
+}
+
+.dropdown li {
+  padding: 10px 20px;
+}
+
+.dropdown a:hover {
+  background-color: var(--secondary-background-color);
+}
+
+.dropdown hr {
+  margin: 8px 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+.hidden {
+  display: none;
+}
+
+.conteiner {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.nav-reserva-lista {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;   
+  margin:0;
+  padding: 0;
+ 
+}
+.titulo-reserva{
+    margin-top: 120px;
+}
+.lista-historial{
+    list-style: none;  
+}
+.reserva-card {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.reserva-header {
+  background-color: #f8f9fa;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.reserva-body {
+  padding: 16px;
+}
+
+.reserva-body p {
+  margin: 0 0 10px;
+}
+
+.reserva-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reserva-lista li {
+  margin-bottom: 6px;
+}
+
+.reserva-footer {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.reserva-boton {
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.reserva-boton:hover {
+  background-color: #3182ce;
+}
+.logo{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 120px;
+    height: 60px;
+    background-color: #eeeeee;
+     margin-top:5px;
+
+    
+}
+.boton-usuario{
+width: 120px;
+    height: 100px;
+ 
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+}
+.titulo-reserva {
+  font-size: 1.5rem; 
+  font-weight: 600; 
+  display: flex;
+  color: #2c3e50; 
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ccc; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  justify-content: space-between;
+}
+
+.boton {
+  padding: 10px 20px;
+  border-radius: 999px;          
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  background-color:#ececec; 
+  color: black;
+  border: 2px solid gray;       
+}
+.leidos {
+
+  border-color: white;
+}
+
+.leidos:hover {
+  border-color: black;
+
+}
+
+.no-leidos {
+border-color: white;
+}
+
+.no-leidos:hover {
+   border-color: black;
+ 
+}
+
+.botones-noti {
+  display: flex;
+  gap: 10px;
+}
+
+footer {
+  background-color: #f1f1f1;
+  margin-top: 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  gap: 200px;
+  padding-top: 60px;
+  padding-bottom: 20px;
+  border-bottom: var(--border-color);
+}
+
+.footer-content div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-content h4 {
+  display: block;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
+}
+
+.content-links {
+  font-size: 15px;
+  color: grey;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.footer-contact div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 25px;
+  font-size: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+/*
+opcional si quiero el historial reserva  con iconos mas grandes
+*/
+
+.titulo-reserva {
+  font-size: 2rem;
+}
+.reserva-card {
+  font-size: 1.1rem;
+  padding: 20px;
+}
+
+.reserva-body {
+  padding: 24px;
+}
+
+.reserva-footer {
+  margin-top: 24px;
+}
+
+.reserva-boton {
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+

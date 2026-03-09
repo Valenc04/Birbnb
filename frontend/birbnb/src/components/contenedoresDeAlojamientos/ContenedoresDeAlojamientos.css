@@ -1,0 +1,62 @@
+
+.alojamiento-containers {
+  background-color: var(--background-principal);
+  padding: 20px 0;
+  margin-left: 20px;
+}
+
+.alojamiento-container-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carousel-container {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  background-color: var(--background-boton);
+  border: var(--bordes);
+  border-radius: 50%;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+.card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 10px;
+  gap: 3px;
+}
+
+.card-content h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.card-content p {
+  font-size: 0.9em;
+  color: gray;
+}
+
+.alojamiento-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}

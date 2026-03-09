@@ -1,0 +1,132 @@
+.reserva-card {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.1rem;
+  padding: 20px;
+}
+
+.reserva-header {
+  background-color: #f8f9fa;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.reserva-body {
+  padding: 24px;
+}
+
+.reserva-body p {
+  margin: 0 0 10px;
+}
+
+.reserva-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reserva-lista li {
+  margin-bottom: 6px;
+}
+
+.link-alojamiento {
+  color: #1e88e5; /* azul */
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.link-alojamiento:hover {
+  color: #1565c0; /* azul más oscuro al pasar el mouse */
+  text-decoration: none;
+}
+
+.reserva-footer {
+  margin-top: 24px;
+  text-align: right;
+}
+
+.reserva-boton {
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+ 
+}
+
+.reserva-boton:hover {
+  background-color: #0c5497;
+ 
+  transform: translateY(-2px);
+}
+
+
+
+
+@media (max-width: 1024px) {
+  .reserva-card {
+    max-width: 90%;
+    padding: 16px;
+    font-size: 1rem;
+  }
+
+  .reserva-body {
+    padding: 20px;
+  }
+
+  .reserva-header {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+
+  .reserva-boton {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 512px) {
+  .reserva-card {
+    max-width: 95%;
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .reserva-body {
+    padding: 16px;
+  }
+
+  .reserva-header {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+
+  .reserva-boton {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .reserva-footer {
+    text-align: center;
+  }
+}
+
+
+
+
+

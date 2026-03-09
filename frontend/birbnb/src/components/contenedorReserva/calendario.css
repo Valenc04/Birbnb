@@ -1,0 +1,86 @@
+input.inputBox {
+
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.calendarWrap {
+  display: inline-block;
+  position: relative;
+ 
+}
+.placeholder-like {
+  color: #999999;
+  font-style: italic; 
+
+}
+.calendarElement {
+  position: absolute;
+  left: 30%;
+   transform: translateX(-50%) scale(0.80);
+  border: 1px solid #ccc;
+  z-index: 999;
+  transform-origin: top center;
+  
+}
+.calendarElement button {
+  background: none!important;
+
+}
+
+.rdrDayDisabled {
+  background: none !important;
+  color: inherit !important;
+  cursor: not-allowed !important;
+  position: relative;
+  border: none !important;
+}
+
+/* Ocultar el tachado por defecto por seguridad */
+.rdrDayDisabled .rdrDayNumber span {
+  text-decoration: none !important;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px; /* para dar espacio a la línea */
+}
+
+/* Pseudo-elemento que dibuja la línea tachada azul translúcida */
+.rdrDayDisabled:not(.rdrDayToday):not(.rdrDayPassive) .rdrDayNumber span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;               /* grosor fijo */
+  background-color: rgba(0, 120, 208, 0.4); /* azul #0078d0 con 40% opacidad */
+  top: 50%;                  /* vertical centrado sobre el número */
+  transform: translateY(-50%);
+  border-radius: 1px;
+  pointer-events: none;
+}
+@media (max-width: 512px) {
+  .calendarElement {
+   
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: auto;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+}
+@media (max-width: 1024px) {
+  .calendarElement {
+    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    max-width: 500px;
+    height: auto;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+}

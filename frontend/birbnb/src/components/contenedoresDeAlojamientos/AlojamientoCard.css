@@ -1,0 +1,61 @@
+/* Contenedor principal de la tarjeta */
+.alojamiento-card {
+  width: 260px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: white;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 500px; /* Altura fija para consistencia */
+}
+
+/* Contenedor de la imagen */
+.alojamiento-img-container {
+  height: 160px;
+  overflow: hidden;
+}
+
+/* Imagen del alojamiento */
+.alojamiento-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.alojamiento-card:hover .alojamiento-image {
+  transform: scale(1.05);
+}
+
+/* Contenido de la tarjeta */
+.card-content {
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Título */
+.card-content h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  padding-top: 7px;
+  color: #333;
+  line-height: 1.3;
+}
+
+/* Contenedor de detalles */
+.card-details {
+  margin-bottom: 0;
+  padding-top: 10px;
+}
+
+/* Efecto hover para mejor interactividad */
+.alojamiento-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}

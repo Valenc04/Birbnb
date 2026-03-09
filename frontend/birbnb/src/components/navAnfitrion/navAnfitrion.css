@@ -1,0 +1,40 @@
+.nav-anfitrion {
+  background: linear-gradient(90deg, #4a90e2 0%, #2f7bd3 100%);
+  color: white;
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem auto;
+  width: min(1100px, calc(100% - 2rem));
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+  box-sizing: border-box;
+  border: none;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo-bienvenida {
+  font-size: clamp(1.05rem, 2.1vw, 1.55rem);
+  font-weight: 700;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.35;
+  word-break: break-word;        
+  white-space: normal;           
+  overflow-wrap: break-word;     
+}
+
+/* 📱 Responsive */
+@media (max-width: 600px) {
+  .nav-anfitrion {
+    width: calc(100% - 1rem);
+    padding: 1rem;
+    min-height: 72px;
+  }
+
+  .titulo-bienvenida {
+    font-size: 1rem;
+  }
+}

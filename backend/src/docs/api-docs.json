@@ -1,0 +1,715 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de BIRBNB",
+    "version": "1.0.0",
+    "description": "API para gestionar alojamientos turísticos, sus reservas y notificaciones."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Servidor local"
+    }
+  ],
+  "paths": {
+    "/alojamientos": {
+      "get": {
+        "tags": ["Alojamiento"],
+        "summary": "Obtener alojamientos con filtros opcionales",
+        "description": "Devuelve una lista paginada de alojamientos que incluye las caracteristicas que indique el usuario.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": { "type": "integer", "default": 1 }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": { "type": "integer", "default": 10 }
+          },
+          {
+            "name": "min",
+            "in": "query",
+            "description": "Precio mínimo por noche",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "max",
+            "in": "query",
+            "description": "Precio máximo por noche",
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "cantidad",
+            "in": "query",
+            "description": "Cantidad mínima de huéspedes que debe soportar el alojamiento",
+            "schema": { "type": "integer" }
+          },
+          {
+            "name": "caracteristicas",
+            "in": "query",
+            "description": "Características requeridas (separadas por comas) [WIFI, PISCINA, ESTACIONAMIENTO, MASCOTAS_PERMITIDAS]",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "ciudad",
+            "in": "query",
+            "description": "Nombre de la ciudad para filtrar",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "pais",
+            "in": "query",
+            "description": "Nombre del país para filtrar",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de alojamientos paginada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AlojamientosPaginados" }
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontraron alojamientos con los filtros aplicados"
+          },
+          "400": {
+            "description": "Parámetros de búsqueda no válidos"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Alojamiento"],
+        "summary": "Crear un nuevo alojamiento",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Alojamiento" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Alojamiento creado",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Alojamiento" }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos del alojamiento no válidos"
+          },
+          "409": {
+            "description": "Ya existe un alojamiento con ese nombre"
+          }
+        }
+      }
+    },
+    "/reserva": {
+      "post": {
+        "tags": ["Reserva"],
+        "summary": "Crear una reserva",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NuevaReserva" },
+              "example": {
+                "huespedReservador": { "idhuespedReservador": "a1b2c3d4-e5f6-7890-abcd-1234567890ab" },
+                "alojamiento": { "idalojamiento": "5f8d0d55b54764421b7156c3" },
+                "cantHuespedes": 2,
+                "rangoFechas": {
+                  "fechaInicio": "2025-06-01T14:00:00.000Z",
+                  "fechaFin":   "2025-06-05T11:00:00.000Z"
+                },
+                "precioPorNoche": 120.50,
+                "fechaAlta": "2025-05-19T10:30:00.000Z",
+                "estado": "PENDIENTE"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Reserva creada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Reserva" },
+                "example": {
+                  "reservaId": "60f7a2b8e1d2f7001c8e4a2b",
+                  "alojamientoId": "5f8d0d55b54764421b7156c3",
+                  "huespedReservadorId": "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
+                  "estado": "PENDIENTE",
+                  "fechaAlta": "2025-05-19T10:30:00.000Z",
+                  "cantidadHuespedes": 2,
+                  "rangoFechas": {
+                    "fechaInicio": "2025-06-01T14:00:00.000Z",
+                    "fechaFin":   "2025-06-05T11:00:00.000Z"
+                  },
+                  "precioNoche": 120.50
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/reserva/{id}/cancel": {
+      "post": {
+        "tags": ["Reserva"],
+        "summary": "Cancelar una reserva",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "string" },
+            "example": "60f7a2b8e1d2f7001c8e4a2b"
+          }
+        ],
+        "requestBody": {
+          "description": "Opcional: motivo de la cancelación",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "motivo": { "type": "string" }
+                }
+              },
+              "example": {
+                "motivo": "Cambio de planes"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reserva cancelada",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Reserva 60f7a2b8e1d2f7001c8e4a2b cancelada exitosamente"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/reserva/historial/{userId}": {
+      "get": {
+        "tags": ["Reserva"],
+        "summary": "Historial de reservas del usuario",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "string" },
+            "example": "6825163ab73f306d6b13fcaa"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": { "type": "integer", "default": 1 },
+            "example": 1
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": { "type": "integer", "default": 10 },
+            "example": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reservas encontradas",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ReservasPaginadas" },
+                "example": {
+                  "page": 1,
+                  "limit": 5,
+                  "total": 3,
+                  "total_pages": 1,
+                  "data": [
+                    {
+                      "reservaId": "60f7a2b8e1d2f7001c8e4a2b",
+                      "alojamientoId": "5f8d0d55b54764421b7156c3",
+                      "huespedReservadorId": "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
+                      "estado": "CONFIRMADA",
+                      "fechaAlta": "2025-05-01T09:00:00.000Z",
+                      "cantidadHuespedes": 2,
+                      "rangoFechas": {
+                        "fechaInicio": "2025-06-10T14:00:00.000Z",
+                        "fechaFin":   "2025-06-15T11:00:00.000Z"
+                      },
+                      "precioNoche": 100.00
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/reserva/{id}": {
+      "put": {
+        "tags": ["Reserva"],
+        "summary": "Modificar una reserva",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "string" },
+            "example": "682635694948c57e12de46bf"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ModificarReserva" },
+              "example": {
+                "rangoFechas": {
+                  "fechaInicio": "2025-06-02T14:00:00.000Z",
+                  "fechaFin":   "2025-06-06T11:00:00.000Z"
+                },
+                "cantHuespedes": 1
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reserva actualizada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Reserva" },
+                "example": {
+                  "reservaId": "60f7a2b8e1d2f7001c8e4a2b",
+                  "alojamientoId": "5f8d0d55b54764421b7156c3",
+                  "huespedReservadorId": "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
+                  "estado": "PENDIENTE",
+                  "fechaAlta": "2025-05-19T10:30:00.000Z",
+                  "cantidadHuespedes": 3,
+                  "rangoFechas": {
+                    "fechaInicio": "2025-06-02T14:00:00.000Z",
+                    "fechaFin":   "2025-06-06T11:00:00.000Z"
+                  },
+                  "precioNoche": 120.50
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/notificaciones": {
+      "post": {
+        "summary": "Crear una nueva notificación",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NotificacionInput" },
+              "example": {
+                "tipo": "RESERVA_CONFIRMADA",
+                "usuarioId": "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
+                "mensaje": "Tu reserva ha sido confirmada"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Notificación creada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Notificacion" },
+                "example": {
+                  "notificacionId": "d4c3b2a1-6f5e-0987-ba43-210987654321",
+                  "tipo": "RESERVA_CONFIRMADA",
+                  "usuarioId": "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
+                  "mensaje": "Tu reserva ha sido confirmada",
+                  "fecha": "2025-05-19T11:00:00.000Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/notificaciones/{notiId}/{userId}": {
+      "get": {
+        "summary": "Obtener una notificación específica de un usuario",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "notiId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Notificación encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Notificacion"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Notificación no encontrada"
+          }
+        }
+      }
+    },
+    "/notificaciones/{userid}": {
+      "get": {
+        "summary": "Obtener todas las notificaciones de un usuario",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de notificaciones",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Notificacion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notificaciones/{userId}/leidas": {
+      "get": {
+        "summary": "Obtener notificaciones leídas de un usuario",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de notificaciones leídas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Notificacion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notificaciones/{userId}/no-leidas": {
+      "get": {
+        "summary": "Obtener notificaciones no leídas de un usuario",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de notificaciones no leídas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Notificacion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notificaciones/{notiId}/{userId}/leer": {
+      "patch": {
+        "summary": "Marcar notificación como leída",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "notiId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Notificación marcada como leída",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Notificacion"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Alojamiento": {
+        "type": "object",
+        "required": [
+          "anfitrion",
+          "nombre",
+          "descripcion",
+          "precioPorNoche",
+          "moneda",
+          "horarioCheckIn",
+          "horarioCheckOut",
+          "direccion",
+          "cantHuespedesMax",
+          "caracteristicas"
+        ],
+        "properties": {
+          "anfitrion": { "type": "string" },
+          "nombre": { "type": "string" },
+          "descripcion": { "type": "string" },
+          "precioPorNoche": { "type": "number" },
+          "moneda": {
+            "type": "string",
+            "enum": ["USD", "EUR", "ARS"]
+          },
+          "horarioCheckIn": { "type": "string" },
+          "horarioCheckOut": { "type": "string" },
+          "direccion": {
+            "type": "object",
+            "properties": {
+              "ciudad": { 
+                "type": "object",
+                "properties": {
+                  "nombre": { "type": "string" },
+                  "pais": {
+                    "type": "object",
+                    "properties": {
+                      "nombre": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "cantHuespedesMax": { 
+            "type": "integer",
+            "description": "Cantidad máxima de huéspedes permitidos",
+            "minimum": 1,
+            "example": 4
+          },
+          "caracteristicas": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "fotos": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": { "type": "string" },
+                "descripcion": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "AlojamientosPaginados": {
+        "type": "object",
+        "properties": {
+          "page": { "type": "integer" },
+          "limit": { "type": "integer" },
+          "totalItems": { "type": "integer" },
+          "totalPages": { "type": "integer" },
+          "items": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Alojamiento" }
+          }
+        }
+      },
+      "Reserva": {
+        "type": "object",
+        "properties": {
+          "reservaId": { "type": "string" },
+          "alojamientoId": { "type": "string" },
+          "huespedReservadorId": { "type": "string" },
+          "estado": { "type": "string" },
+          "fechaAlta": { "type": "string", "format": "date-time" },
+          "cantidadHuespedes": { "type": "integer" },
+          "rangoFechas": {
+            "type": "object",
+            "properties": {
+              "fechaInicio": { "type": "string", "format": "date" },
+              "fechaFin": { "type": "string", "format": "date" }
+            }
+          },
+          "precioNoche": { "type": "number" }
+        }
+      },
+      "ReservasPaginadas": {
+        "type": "object",
+        "properties": {
+          "page": { "type": "integer" },
+          "limit": { "type": "integer" },
+          "total": { "type": "integer" },
+          "total_pages": { "type": "integer" },
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Reserva" }
+          }
+        }
+      },
+      "NuevaReserva": {
+        "type": "object",
+        "required": ["alojamientoId", "huespedReservadorId", "rangoFechas", "cantidadHuespedes"],
+        "properties": {
+          "alojamientoId": { "type": "string" },
+          "huespedReservadorId": { "type": "string" },
+          "rangoFechas": {
+            "type": "object",
+            "properties": {
+              "fechaInicio": { "type": "string", "format": "date" },
+              "fechaFin": { "type": "string", "format": "date" }
+            }
+          },
+          "cantidadHuespedes": { "type": "integer" }
+        }
+      },
+      "ModificarReserva": {
+        "type": "object",
+        "properties": {
+          "cantHuespedes": { "type": "integer" },
+          "rangoFechas": {
+            "type": "object",
+            "properties": {
+              "fechaInicio": { "type": "string", "format": "date" },
+              "fechaFin": { "type": "string", "format": "date" }
+            }
+          }
+        }
+      },
+      "Notificacion": {
+        "type": "object",
+        "properties": {
+          "notificacionId": { "type": "string" },
+          "mensaje": { "type": "string" },
+          "usuario": { "type": "string" },
+          "fechaAlta": { "type": "string", "format": "date" },
+          "leida": { "type": "boolean" },
+          "fechaLeida": { "type": "string", "format": "date" }
+        }
+      },
+      "NotificacionesPaginadas": {
+        "type": "object",
+        "properties": {
+          "page": { "type": "integer" },
+          "limit": { "type": "integer" },
+          "total": { "type": "integer" },
+          "total_pages": { "type": "integer" },
+          "data": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Notificacion" }
+          }
+        },
+        "required": [
+          "id",
+          "mensaje",
+          "usuario",
+          "fechaAlta",
+          "leida"
+        ]
+      },
+      "NotificacionInput": {
+        "type": "object",
+        "properties": {
+          "mensaje": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "mensaje",
+          "userId"
+        ]
+      }
+    }
+  },
+  "tags": [
+    { "name": "Alojamiento", "description": "Operaciones relacionadas con alojamientos" },
+    { "name": "Reserva", "description": "Operaciones relacionadas con reservas" },
+    { "name": "Notificacion", "description": "Operaciones relacionadas con notificaciones" }
+  ]
+}

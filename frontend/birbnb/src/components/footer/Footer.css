@@ -1,0 +1,83 @@
+footer {
+  background-color: var(--secondary-background-color);
+  width: 100%;
+}
+
+/* Footer principal */
+.footer-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 200px; /* Espacio grande para desktop */
+  padding: 60px 60px 20px 60px;
+  border-bottom: var(--border-color);
+  flex-wrap: wrap; /* para que pueda bajar elementos si falta espacio */
+}
+
+.footer-content div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.content-links {
+  font-size: 15px;
+  color: grey;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-contact div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 25px;
+  font-size: 15px;
+  flex-wrap: wrap;
+}
+
+/* Responsive para tablets */
+@media (max-width: 1024px) {
+  .footer-content {
+    gap: 80px;
+    padding: 40px 40px 20px 40px;
+  }
+  .footer-contact {
+    gap: 15px;
+  }
+}
+
+/* Responsive para celulares */
+@media (max-width: 512px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 20px 20px 20px;
+  }
+
+  .footer-content div {
+    width: 100%;
+  }
+
+  .footer-contact {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .footer-contact div {
+    justify-content: flex-start;
+    gap: 15px;
+    width: 100%;
+  }
+
+  footer {
+    width: 100%;
+  }
+}

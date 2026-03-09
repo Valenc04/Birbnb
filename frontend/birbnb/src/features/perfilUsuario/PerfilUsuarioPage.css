@@ -1,0 +1,42 @@
+.perfil-container {
+  max-width: 900px;
+  margin: 60px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+}
+
+.perfil-titulo {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #2c3e50;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+
+.perfil-boton {
+  margin-top: 20px;
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.perfil-boton:hover {
+  background-color: #2563eb;
+}
+
+.skeleton-card {
+  display: flex;
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 40px;
+  gap: 40px;
+  align-items: center;
+}

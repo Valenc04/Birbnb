@@ -1,0 +1,46 @@
+:root {
+  --azul: #3182ce;
+  --blanco: #f4f4f4;
+  --gris: #ffffff5b;
+  --gris-oscuro: #333;
+  --bordes: 1px solid #e2e8f0;
+  --borde-grueso: 2px solid #e2e8f0;
+  --background-principal: #ffffff;
+  --background-secundario: #f7f7f7;
+  --background-boton: #ebebeb;
+  --gradienteBanner: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+  --sombra: 0 1px 2px 0 #0000001a;
+  --fuente-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --border-color: #EBEBEB;
+  --primary-background-color: #FFFFFF;
+  --secondary-background-color: #F7F7F7;
+  --button-background-color: #EBEBEB;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fuente-principal);
+  background-color: var(--background-principal);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  padding: 0 15%;
+  margin-top: 20px;
+}

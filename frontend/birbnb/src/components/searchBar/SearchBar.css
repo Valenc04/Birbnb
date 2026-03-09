@@ -1,0 +1,166 @@
+.hero-search {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background: white;
+}
+
+.compact-search-bar {
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+}
+
+.search-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.search-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-field label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.search-field input {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.search-field input:focus {
+    outline: none;
+    border-color: var(--azul);
+}
+
+.price-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.price-input input {
+    width: 60px;
+}
+
+.price-input span {
+    color: #717171;
+    font-size: 14px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.feature-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.feature-checkbox input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--azul);
+}
+
+.feature-checkbox label {
+    font-size: 13px;
+    color: #333;
+}
+
+.search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: var(--azul);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.search-btn:hover {
+    background: var(--azul);
+}
+
+@media (max-width: 1024px) {
+  .compact-search-bar {
+    max-width: 95%;
+    padding: 14px;
+  }
+  .search-grid {
+    gap: 10px;
+  }
+  .search-field input {
+    font-size: 13px;
+    padding: 9px 10px;
+  }
+  .price-input input {
+    width: 50px;
+  }
+  .feature-checkbox label {
+    font-size: 12px;
+  }
+  .search-btn {
+    padding: 11px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Para pantallas <= 512px */
+@media (max-width: 512px) {
+  .compact-search-bar {
+    max-width: 98%;
+    padding: 12px;
+  }
+  .search-grid {
+    grid-template-columns: 1fr; /* una columna para móviles */
+    gap: 8px;
+  }
+  .price-input {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .price-input input {
+    width: 100%; /* inputs ancho completo en móvil */
+  }
+  .features-grid {
+    grid-template-columns: 1fr; /* una columna para checkboxes */
+  }
+  .feature-checkbox {
+    gap: 4px;
+  }
+  .feature-checkbox input {
+    width: 14px;
+    height: 14px;
+  }
+  .feature-checkbox label {
+    font-size: 12px;
+  }
+  .search-btn {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+}
