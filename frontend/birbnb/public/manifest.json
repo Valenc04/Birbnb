@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Birbnb",
+  "name": "Birbnb - Tu plataforma de alojamiento",
   "icons": [
     {
       "src": "favicon.ico",
