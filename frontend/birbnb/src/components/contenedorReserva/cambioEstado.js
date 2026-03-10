@@ -19,7 +19,7 @@ const ReservaEstadoAccion = ({
   const [mensaje, setMensaje] = useState('');
   const [accionConfirmada, setAccionConfirmada] = useState(false);
   const { usuario } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const [mostrarFeedback, setMostrarFeedback] = useState(false);
 
   const puedeCancelar =

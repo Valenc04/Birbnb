@@ -38,10 +38,11 @@ const HistorialReservasPage = () => {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!usuario?.id) return;
     fetchHistorialUserReservas();
-  }, [page,usuario]);
+  }, [page, usuario]);
 
 
   return (
