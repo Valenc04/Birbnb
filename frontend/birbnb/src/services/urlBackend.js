@@ -1,5 +1,5 @@
 const getUrlBackend = () => (
-    process.env.REACT_APP_BACKEND || 'http://localhost:3000'
+    process.env.REACT_APP_API_URL || 'http://localhost:3000'
 )
 
 export default getUrlBackend
